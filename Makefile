@@ -12,10 +12,10 @@ LIBS = -lpthread
 BIN_DIR = ./bin
 
 # Source and object files
-# Add userInputHelpers.c to the SOURCES
-SOURCES = fredJourney.c userInputHelpers.c
+# Add userInputHelpers.c to the SOURCES and adjust paths to src directory
+SOURCES = src/fredJourney.c src/userInputHelpers.c
 OBJECTS = $(SOURCES:.c=.o)
-OBJECTS_WITH_PATH = $(addprefix $(BIN_DIR)/,$(OBJECTS))
+OBJECTS_WITH_PATH = $(addprefix $(BIN_DIR)/,$(notdir $(OBJECTS)))
 
 # Target rules
 all: $(BIN_DIR) fredJourney startScript
@@ -26,8 +26,8 @@ $(BIN_DIR):
 fredJourney: $(OBJECTS_WITH_PATH)
 	$(CC) -o $(BIN_DIR)/$@ $^ $(LDFLAGS) $(LIBS)
 
-# Pattern rule for object file compilation
-$(BIN_DIR)/%.o: %.c
+# Pattern rule for object file compilation, adjusted for src directory
+$(BIN_DIR)/%.o: src/%.c
 	$(CC) $(CFLAGS) $(INCFLAGS) -c $< -o $@
 
 # Rule to create a start script
@@ -36,9 +36,9 @@ startScript:
 	echo "exec $(BIN_DIR)/fredJourney \"\$$@\"" >> startFredJourney.sh
 	chmod +x startFredJourney.sh
 
-# Utility rule for counting lines of code
+# Utility rule for counting lines of code, adjusted for src directory
 count:
-	wc -l *.c *.h
+	wc -l src/*.c src/*.h
 
 # Clean the build directory
 clean:
