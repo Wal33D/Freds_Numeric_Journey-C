@@ -1,11 +1,22 @@
-//
-// Explore the basics of variables, pointers, and memory addresses in C.
-// Assign a value to a variable named fred, display it, and then manipulate
-// it using a pointer. Display fred's address in both decimal and hexadecimal
-// formats. Finally, modify fred's value using the pointer and display the changes.
-//
+/*
+ //Interactive Numeric Journey in C
+ //
+ //This program embarks on an interactive exploration of the basics of variables, 
+ //pointers, and memory addresses in C. It starts by introducing a variable named 
+ //fred and allows the user to assign a value to it. The program displays fred's 
+ //value and address in both decimal and hexadecimal formats. It incorporates user 
+ //input to manipulate fred's value through a pointer, offering an engaging and 
+ //educational exploration of how pointers can alter the state of a variable.
+ //
+ //User interaction is further enhanced by allowing decisions on the initial value 
+ //of fred and how much fred's value should be altered through the pointer, making 
+ //it not just a demonstration, but an interactive journey through the concepts 
+ //of variables and pointers in C.
+ */
+
 #include <stdio.h>
 #include <stdint.h>
+#include "userInputHelpers.h" 
 
 // Function declaration
 double getUserInput(double presetValue, const char* variableName);
@@ -50,36 +61,4 @@ int main() {
     printf("\n🌠 And thus concludes a chapter of Fred's Numeric Journey. Until next time! 🌠\n");
 
     return 0;
-}
-
-// Function to get user input for a double value
-double getUserInput(double presetValue, const char* variableName) {
-    double value;
-    char decision;
-
-    printf("\nWould you like to use the preset value for %s [%.2f]? (Y/n): ", variableName, presetValue);
-    decision = getchar();
-    // Clear the input buffer
-    while (getchar() != '\n');
-
-    if (decision == 'n' || decision == 'N') {
-        printf("Enter your value for %s: ", variableName);
-        scanf("%lf", &value);
-        // Clear the input buffer after reading
-        while (getchar() != '\n');
-        return value;
-    }
-
-    return presetValue;
-}
-
-// Function to get user input for how much to change the pointer value
-double getPointerInput(double currentPointerValue) {
-    double changeAmount;
-    printf("Fred's guide can alter his essence. Current value is: %.2f\n", currentPointerValue);
-    printf("How much would you like to add to Fred's value? ");
-    scanf("%lf", &changeAmount);
-    // Clear the input buffer after reading
-    while (getchar() != '\n');
-    return changeAmount;
 }

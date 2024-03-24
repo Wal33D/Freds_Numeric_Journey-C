@@ -12,7 +12,8 @@ LIBS = -lpthread
 BIN_DIR = ./bin
 
 # Source and object files
-SOURCES = fredJourney.c
+# Add userInputHelpers.c to the SOURCES
+SOURCES = fredJourney.c userInputHelpers.c
 OBJECTS = $(SOURCES:.c=.o)
 OBJECTS_WITH_PATH = $(addprefix $(BIN_DIR)/,$(OBJECTS))
 
@@ -31,7 +32,7 @@ $(BIN_DIR)/%.o: %.c
 
 # Utility rule for counting lines of code
 count:
-	wc *.c *.cc *.C *.cpp *.h *.hpp
+	wc -l *.c *.h
 
 # Clean the build directory
 clean:
