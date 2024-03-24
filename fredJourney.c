@@ -4,12 +4,12 @@
 // it using a pointer. Display fred's address in both decimal and hexadecimal
 // formats. Finally, modify fred's value using the pointer and display the changes.
 //
-
 #include <stdio.h>
 #include <stdint.h>
 
 // Function declaration
 double getUserInput(double presetValue, const char* variableName);
+double getPointerInput(double currentPointerValue);
 
 int main() {
     double presetFred = 42.24; // Preset value for fred
@@ -39,9 +39,10 @@ int main() {
     printf("In decimals: %lu\n", (unsigned long)fredsPointer);
     printf("In hexadecimals: %p\n", fredsPointer);
 
-    // A twist in the tale: Altering Fred's value through the guide
-    printf("\n🌀 A twist in the tale! The guide alters Fred's essence...\n");
-    *fredsPointer += 57.76;
+    // A twist in the tale: User decides how to alter Fred's value through the guide
+    printf("\n🌀 A twist in the tale! You decide how the guide alters Fred's essence...\n");
+    double changeAmount = getPointerInput(*fredsPointer);
+    *fredsPointer += changeAmount;
     printf("Behold! Fred's new value, through the magic of pointers: %.2f\n", *fredsPointer);
     printf("And directly from Fred: %.2f\n", fred);
 
@@ -70,4 +71,15 @@ double getUserInput(double presetValue, const char* variableName) {
     }
 
     return presetValue;
+}
+
+// Function to get user input for how much to change the pointer value
+double getPointerInput(double currentPointerValue) {
+    double changeAmount;
+    printf("Fred's guide can alter his essence. Current value is: %.2f\n", currentPointerValue);
+    printf("How much would you like to add to Fred's value? ");
+    scanf("%lf", &changeAmount);
+    // Clear the input buffer after reading
+    while (getchar() != '\n');
+    return changeAmount;
 }
