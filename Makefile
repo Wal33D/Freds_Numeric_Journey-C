@@ -18,7 +18,7 @@ OBJECTS = $(SOURCES:.c=.o)
 OBJECTS_WITH_PATH = $(addprefix $(BIN_DIR)/,$(OBJECTS))
 
 # Target rules
-all: $(BIN_DIR) fredJourney
+all: $(BIN_DIR) fredJourney startScript
 
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
@@ -30,6 +30,12 @@ fredJourney: $(OBJECTS_WITH_PATH)
 $(BIN_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) $(INCFLAGS) -c $< -o $@
 
+# Rule to create a start script
+startScript:
+	echo "#!/bin/sh" > startFredJourney.sh
+	echo "exec $(BIN_DIR)/fredJourney \"\$$@\"" >> startFredJourney.sh
+	chmod +x startFredJourney.sh
+
 # Utility rule for counting lines of code
 count:
 	wc -l *.c *.h
@@ -38,3 +44,4 @@ count:
 clean:
 	rm -f $(BIN_DIR)/*.o
 	rm -f $(BIN_DIR)/fredJourney
+	rm -f startFredJourney.sh
