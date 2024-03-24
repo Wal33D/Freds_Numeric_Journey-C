@@ -60,10 +60,5 @@ Feel free to fork this project, submit pull requests, or send suggestions to imp
 
 This project is open-sourced under the MIT License.
 
-## 📞 Contact
 
-If you have any questions, feedback, or just want to say hi, you can reach me at:
-- **Email**: aquataze@yahoo.com
-- **GitHub**: [Wal33D](https://github.com/Wal33D)
-
-Enjoy the journey through the realms of C programming with Fred!
+# Enjoy the journey through the realms of C programming with Fred!
